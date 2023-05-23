@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import SummaryCard from "../components/SummaryCard";
-import { getJobs } from "../api/todoApi";
+import { getJobs, getSummary } from "../api/todoApi";
 import JobItem from "../components/JobItem";
 
 export default function Home() {
   const [jobs, setJobs] = useState([]);
+  const [summary, setSummary] = useState({})
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -13,14 +14,18 @@ export default function Home() {
       console.log(rs.data);
       setJobs(rs.data);
     });
+    getSummary(token).then(rs=> {
+      // console.log(rs.data)
+      setSummary(rs.data)
+    })
   }, []);
 
   return (
     <>
       <div className="flex justify-around gap-2 mt-3">
-        <SummaryCard title="All Jobs" amount="20" />
-        <SummaryCard title="Ongoing Jobs" amount="12" />
-        <SummaryCard title="Jobs Done" amount="8" />
+        <SummaryCard title="All Jobs" amount={summary.all} />
+        <SummaryCard title="Ongoing Jobs" amount={summary.unDone} />
+        <SummaryCard title="Jobs Done" amount={summary.done} />
       </div>
       <div className="w-2/3 mx-auto mt-5">
         {jobs.length > 0 ? (
