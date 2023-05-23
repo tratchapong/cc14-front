@@ -30,3 +30,6 @@ export const getSummary = (token) => {
     return todoApi.get('/todos/summary', addToken(token))
 }
 
+export const addJob = (input, token) => {
+    return todoApi.post('/todos', input, addToken(token))
+}

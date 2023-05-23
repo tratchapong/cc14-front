@@ -16,6 +16,9 @@ export default function Navbar() {
           <NavLink className="navlink" to="/">
             Home
           </NavLink>
+          <NavLink className="navlink" to="/addtodo">
+            Add Job
+          </NavLink>
           <div className="navlink cursor-pointer" onClick={hdlLogout}>
             Logout
           </div>

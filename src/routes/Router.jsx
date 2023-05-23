@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar'
 import Header from '../components/Header'
 import { useAuth } from '../contexts/AuthContext'
 import GuestHome from '../pages/GuestHome'
+import AddTodoForm from '../pages/AddTodoForm'
 
 
 export default function Router() {
@@ -35,6 +36,11 @@ export default function Router() {
                 path: 'register',
                 element: user ? <Navigate to='/' /> : <Register />
             },
+            {
+                path: 'addtodo',
+                element: user ? <AddTodoForm /> : <Navigate to='/' />
+            },
+
         ]
     }
   ])
