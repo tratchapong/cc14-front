@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function JobItem(props) {
   const { job } = props;
@@ -13,6 +14,9 @@ export default function JobItem(props) {
           <p>Remaining day: {job.remainDay}</p>
           <p>Due date: {job.dueDate}</p>
           <p>Status: {job.status ? "Done" : "OnGoing"}</p>
+          <div className="w-20">
+            <Link className="btn btn-circle" to={`/updatetodo/${job.id}`}>Edit</Link>
+          </div>
         </div>
       </div>
     </div>
