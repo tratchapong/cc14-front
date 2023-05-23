@@ -1,5 +1,6 @@
 import {useState} from "react";
 import axios from 'axios'
+import {register} from '../api/todoApi'
 
 export default function Register() {
   const [input, setInput] = useState({
@@ -17,10 +18,11 @@ export default function Register() {
     e.preventDefault()
     if(password !== confirmPassword)
       return alert('Password not macth, recheck')
-    axios.post('http://localhost:8080/auth/register', {
+    register({
       username : username,
       password : password
-    }).then( rs => {
+    })
+      .then( rs => {
       console.log(rs)
     }).catch(err => console.log(err))
   }
@@ -63,7 +65,7 @@ export default function Register() {
             value={input.confirmPassword}
           />
         </div>
-        <button type="submit" className="btn">
+        <button type="submit" className="btn btn-outline w-full btn-info">
           Register
         </button>
       </form>

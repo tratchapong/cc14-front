@@ -1,6 +1,6 @@
 import {useState} from "react";
 import { useAuth } from "../contexts/AuthContext";
-import axios from 'axios'
+import {login, getMe} from '../api/todoApi'
 
 export default function Login() {
   const {user, setUser} = useAuth()
@@ -17,17 +17,15 @@ export default function Login() {
   const hdlSubmit = e => {
     e.preventDefault()
     // validation
-    axios.post('http://localhost:8080/auth/login', input)
+ 
+    login(input)
     .then( rs => {
       // console.log(rs.data.token)
       localStorage.setItem('token', rs.data.token)
-      return axios.get('http://localhost:8080/auth/getMe',{
-        headers : {
-          Authorization: `Bearer ${rs.data.token}`
-        }
-      })
+      let token = localStorage.getItem('token')
+      return getMe(token)
     }).then( rs => {
-      console.log(rs.data)
+      // console.log(rs.data)
       setUser(rs.data)
     }).catch(err => alert(err.response.data.error || err.message))
   }
