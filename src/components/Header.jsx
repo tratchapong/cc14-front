@@ -10,7 +10,7 @@ export default function Header() {
       <div className="w-16"> 
         <Penguin />
       </div>
-      <p>{user?.name}</p>
+      <p>{user?.name || 'Guest'}</p>
       <Navbar />
     </div>
   );

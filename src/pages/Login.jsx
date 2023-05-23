@@ -20,6 +20,7 @@ export default function Login() {
     axios.post('http://localhost:8080/auth/login', input)
     .then( rs => {
       // console.log(rs.data.token)
+      localStorage.setItem('token', rs.data.token)
       return axios.get('http://localhost:8080/auth/getMe',{
         headers : {
           Authorization: `Bearer ${rs.data.token}`
@@ -28,7 +29,7 @@ export default function Login() {
     }).then( rs => {
       console.log(rs.data)
       setUser(rs.data)
-    }).catch(err => console.log(err))
+    }).catch(err => alert(err.response.data.error || err.message))
   }
 
   return (
